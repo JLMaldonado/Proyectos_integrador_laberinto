@@ -1,3 +1,4 @@
+
 from readchar import readkey, key
 from typing import List, Tuple
 import os 
@@ -27,16 +28,11 @@ def main_loop(laberinto: List[List[str]], inicio: Tuple[int, int], final: Tuple[
     laberinto[px][py] = 'P'  # Posición inicial del jugador
 
     while (px, py) != final:
-        
         mostrar_laberinto(laberinto)
-        print("==========================================")
-        print(f"========= Juego de laberinto --- Jugador {nombre}--- ==============")
-        print("==========================================")
-        print("--Presiona w (arriba) , s (abajo) , d (derecha), a (izquierda)-- ")
         tecla = readkey() if os.name == 'nt' else input()
         if final == (19,27):
             print(f"----------------------------------------------------")
-            print(f"--------------!!Ganaste!! {nombre} ---------------------")
+            print(f"--------------!!Ganaste!! {nombre} ------------------")
             print(f"----------------------------------------------------")
         # Calcula la nueva posición tentativa del jugador
         nueva_px, nueva_py = px, py
@@ -84,7 +80,6 @@ laberinto_str = """
 
 
 """
-
 
 # Coordenadas de inicio y final
 inicio = (0, 0)
