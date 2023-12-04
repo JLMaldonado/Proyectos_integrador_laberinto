@@ -89,4 +89,26 @@ if __name__ == "__main__":
 
     juego = Juego(laberinto_str, inicio, final, nombre)
     juego.main_loop()
+class JuegoArchivo(Juego):
+    def __init__(self, path_a_mapas: str, nombre: str):
+        self.path_a_mapas = path_a_mapas
+        self.nombre = nombre
+        self.laberinto, self.inicio, self.final = self.leer_mapa()
 
+    def leer_mapa(self):
+        archivos = os.listdir(self.path_a_mapas)
+        nombre_archivo = random.choice(archivos)
+        path_completo = f"{self.path_a_mapas}/{nombre_archivo}"
+        with open(path_completo, "r") as archivo:
+            lineas = archivo.readlines()
+            inicio = tuple(map(int, lineas[0].strip().split()))
+            final = tuple(map(int, lineas[1].strip().split()))
+            laberinto = [list(linea.strip()) for linea in lineas[2:]]
+            return laberinto, inicio, final
+
+if __name__ == "__main__":
+    path_a_mapas = "map1.txt"  # Replace with the actual path to the map files
+    nombre = "map1.txt"  # Replace with the actual player name
+
+    juego = JuegoArchivo(path_a_mapas, nombre)
+    juego.main_loop()
